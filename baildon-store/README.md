@@ -17,14 +17,14 @@ Commands:
   clear     Clear store entries
   count     Display B+Tree entry count
   delete    Delete this key
+  entries   List store entries
   get       Get this key
+  help      Interactive Help
   insert    Insert key value pair
   keys      List store keys
-  entries   List store entries
   nodes     List store nodes
   values    List store values
   verify    Verify store
-  help      Print this message or the help of the given subcommand(s)
 
 Arguments:
   <STORE>  Store location

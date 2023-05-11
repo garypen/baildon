@@ -1,5 +1,7 @@
 ## baildon
 
+A very simple B+Tree library.
+
 Features:
 
  - Generic B+Tree
@@ -47,23 +49,16 @@ There are a few simple examples to show how to use the library:
 
 ```sh
 cargo run --example hello
+cargo run --example streaming
 ```
-
-## Acknowledgements
-
-TBD
 
 ## Benchmarks
 
-If you want to look at my criterion generated [report](https://garypen.github.io/baildon/target/criterion/report/index.html), the clearest comparison is from clicking on the `get` link, but feel free to dig into the details.
-
-If you want to generate your own set of benchmarking comparisons, download the repo and run the following:
+I've got some very simple benchmarks that I've used during development to look for regressions. I'll aim to improve these at some point.
 
 ```sh
-cargo bench --bench baildon -- --plotting-backend gnuplot --baseline 0.1.0
+cargo bench --bench baildon
 ```
-
-This assumes that you have gnuplot installed on your system. (`apt install gnuplot`) and that you have installed [criterion](https://crates.io/crates/cargo-criterion) for benchmarking.
 
 ## License
 

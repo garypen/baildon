@@ -38,19 +38,19 @@ enum Parameter {
     Count,
     /// Delete this key
     Delete { key: String },
+    /// List store entries
+    Entries {
+        /// Direction (Descending or Ascending)
+        direction: Option<Direction>,
+    },
     /// Get this key
     Get { key: String },
-    /// Help
+    /// Interactive Help
     Help,
     /// Insert key value pair
     Insert { key: String, value: String },
     /// List store keys
     Keys {
-        /// Direction (Descending or Ascending)
-        direction: Option<Direction>,
-    },
-    /// List store entries
-    Entries {
         /// Direction (Descending or Ascending)
         direction: Option<Direction>,
     },
