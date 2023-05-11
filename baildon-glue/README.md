@@ -2,6 +2,8 @@
 
 A CLI which implements a simple SQL Database using GlueSQL
 
+> **_Note:_** Not released to crates.io as yet because the implementation is against `main` branch of GlueSQL.
+
 ## Features
 
 A simple SQL database CLI which supports all the SQL features provided by GlueSQL.
