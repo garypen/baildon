@@ -8,7 +8,7 @@ repository.workspace = true
 homepage.workspace = true
 documentation.workspace = true
 readme = "README.md"
-keywords = ["key-value-store", "kv-store", "key-value", "btree", "async", "tokio"]
+keywords = ["key-value-store", "kv-store", "key-value", "btree", "async"]
 categories = ["asynchronous", "data-structures"]
 edition.workspace = true
 
