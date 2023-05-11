@@ -1,0 +1,32 @@
+[workspace]
+
+members = [
+    "baildon",
+    "baildon-store",
+    "baildon-glue"
+]
+
+[workspace.package]
+version = "0.1.0"
+authors = [
+  "garypen <garypen@gmail.com>",
+]
+license = "Apache-2.0"
+repository = "https://github.com/garypen/baildon"
+homepage = "https://github.com/garypen/baildon"
+documentation = "https://github.com/garypen/baildon#readme"
+edition = "2021"
+
+[workspace.dependencies]
+anyhow = "1.0.71"
+clap = { version = "4.2.7", features = ["derive"] }
+dirs = "5.0.1"
+futures = "0.3.28"
+libc = "0.2.144"
+rustyline = "11.0.0"
+serde = { version = "1.0.163", features = ["derive", "rc"] }
+strum = { version = "0.24.1", features = ["derive"] }
+tokio = { version = "1.28.1", features = ["full"] }
+tracing = "0.1.37"
+tracing-appender = "0.2.2"
+tracing-subscriber = { version = "0.3.17", features = ["env-filter", "json"] }

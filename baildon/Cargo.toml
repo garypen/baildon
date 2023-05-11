@@ -1,0 +1,44 @@
+[package]
+name = "baildon"
+version.workspace = true
+description = "B+Tree library"
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+readme = "README.md"
+keywords = ["key-value-store", "kv-store", "key-value", "btree", "async", "tokio"]
+categories = ["asynchronous", "data-structures"]
+edition.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+bincode = "1.3.3"
+futures.workspace = true
+once_cell = "1.17.1"
+serde.workspace = true
+strum.workspace = true
+thiserror = "1.0.40"
+tokio.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+[dev-dependencies]
+criterion = { version = "0.4", features = ["async_tokio"] }
+rand = "0.8.5"
+tracing = {version = "0.1", default-features = false}
+tracing-subscriber = {version = "0.3", default-features = false, features = ["env-filter", "fmt"]}
+test-log = { version = "0.2.11", default-features = false, features = ["trace"] }
+
+[[bench]]
+name = "baildon"
+harness = false
+
+[[example]]
+name = "hello"
+path = "examples/hello.rs"
+
+[[example]]
+name = "streaming"
+path = "examples/streaming.rs"

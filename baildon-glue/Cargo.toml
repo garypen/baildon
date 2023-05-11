@@ -1,0 +1,33 @@
+[package]
+name = "baildon-glue"
+version.workspace = true
+description = "Simple SQL Database"
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+readme = "README.md"
+keywords = ["database", "embedded-database", "key-value-store", "kv-store", "key-value", "btree", "async", "tokio"]
+categories = ["asynchronous", "database-implementations", "data-structures"]
+edition.workspace = true
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+async-trait = "0.1.68"
+anyhow.workspace = true
+clap.workspace = true
+dirs.workspace = true
+futures.workspace = true
+# gluesql = { version = "0.13", default-features = false, features = ["shared-memory-storage", "alter-table", "index", "transaction"] }
+gluesql = { git = "https://github.com/gluesql/gluesql.git", branch = "main", default-features = false, features = ["shared-memory-storage"] }
+baildon = { path = "../baildon" }
+libc.workspace = true
+rustyline.workspace = true
+serde.workspace = true
+serde_json = { version = "1.0.96", features = ["preserve_order"] }
+strum.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+tracing-appender.workspace = true
+tracing-subscriber.workspace = true
