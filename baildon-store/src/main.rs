@@ -59,6 +59,8 @@ enum Parameter {
         /// Direction (Descending or Ascending)
         direction: Option<Direction>,
     },
+    /// Node Utilization
+    Utilization,
     /// List store values
     Values {
         /// Direction (Descending or Ascending)
@@ -326,6 +328,9 @@ async fn process_parameter(btree: &Baildon<String, String>, parameter: &Paramete
             } else {
                 btree.print_nodes(Direction::Ascending).await
             }
+        }
+        Parameter::Utilization => {
+            println!("Utilization: {:.1}%", 100.0 * btree.utilization().await);
         }
         Parameter::Verify => match btree.verify(Direction::Ascending).await {
             Ok(_) => println!("Ok"),

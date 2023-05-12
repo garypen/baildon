@@ -674,7 +674,7 @@ where
 
         let callback = |node: &Node<K, V>| {
             used.fetch_add(node.len(), Ordering::SeqCst);
-            total.fetch_add(self.branch as usize - 1, Ordering::SeqCst);
+            total.fetch_add(self.branch as usize, Ordering::SeqCst);
             ControlFlow::Continue(())
         };
         self.traverse_leaf_nodes(Direction::Ascending, callback)
