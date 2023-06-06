@@ -19,8 +19,7 @@ anyhow.workspace = true
 clap.workspace = true
 dirs.workspace = true
 futures.workspace = true
-# gluesql = { version = "0.13", default-features = false, features = ["shared-memory-storage", "alter-table", "index", "transaction"] }
-gluesql = { git = "https://github.com/gluesql/gluesql.git", branch = "main", default-features = false, features = ["shared-memory-storage"] }
+gluesql = { version = "0.14.0", default-features = false }
 baildon = { path = "../baildon" }
 libc.workspace = true
 rustyline.workspace = true
