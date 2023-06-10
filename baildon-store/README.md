@@ -35,9 +35,7 @@ Options:
   -V, --version  Print version
 ```
 
-[![Crates.io](https://img.shields.io/crates/v/baildon.svg)](https://crates.io/crates/baildon)
-
-[API Docs](https://docs.rs/baildon/latest/baildon)
+[![Crates.io](https://img.shields.io/crates/v/baildon-store.svg)](https://crates.io/crates/baildon-store)
 
 ## Installation
 

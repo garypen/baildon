@@ -2,11 +2,9 @@
 
 A CLI which implements a simple SQL Database using GlueSQL
 
-> **_Note:_** Not released to crates.io as yet because the implementation is against `main` branch of GlueSQL.
-
 ## Features
 
-A simple SQL database CLI which supports all the SQL features provided by GlueSQL.
+A simple SQL database CLI built using baildon and GlueSQL.
 
 ```sh
 baildon-glue --help
@@ -23,9 +21,7 @@ Options:
   -V, --version  Print version
 ```
 
-[![Crates.io](https://img.shields.io/crates/v/baildon.svg)](https://crates.io/crates/baildon)
-
-[API Docs](https://docs.rs/baildon/latest/baildon)
+[![Crates.io](https://img.shields.io/crates/v/baildon-glue.svg)](https://crates.io/crates/baildon-glue)
 
 ## Installation
 
