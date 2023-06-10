@@ -121,17 +121,18 @@ async fn main() -> Result<()> {
     }
 
     glue.storage.save().await.expect("It will save");
-    // Dump some data
+
+    glue.storage.print_tables().await?;
+
+    let mut sep = "";
     let callback = |(key, value)| {
-        eprintln!("key: {key:?}, value: {value:?}");
+        print!("{sep}{key:?}:{value:?}");
+        sep = ", ";
         ControlFlow::Continue(())
     };
-    glue.storage
-        .schemas
-        .traverse_entries(Direction::Ascending, callback)
-        .await;
-    glue.storage.print_tables().await?;
-    println!("utilization: {}", glue.storage.schemas.utilization().await);
+    glue.storage.schemas.traverse_entries(Direction::Ascending, callback).await;
+    println!("\nutilization: {}", glue.storage.schemas.utilization().await);
+    println!();
 
     Ok(())
 }

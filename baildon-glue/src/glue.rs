@@ -188,7 +188,7 @@ impl BaildonGlue {
             ControlFlow::Continue(())
         };
         table.traverse_entries(Direction::Ascending, callback).await;
-        println!("utilization: {}", table.utilization().await);
+        println!("\nutilization: {}", table.utilization().await);
         println!();
         Ok(())
     }
