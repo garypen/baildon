@@ -6,7 +6,6 @@ use std::str::FromStr;
 use anyhow::Result;
 use baildon::btree::Baildon;
 use baildon::btree::Direction;
-use clap::CommandFactory;
 use clap::Parser;
 use clap::Subcommand;
 use rustyline::error::ReadlineError;
@@ -45,8 +44,6 @@ enum Parameter {
     },
     /// Get this key
     Get { key: String },
-    /// Interactive Help
-    Help,
     /// Insert key value pair
     Insert { key: String, value: String },
     /// List store keys
@@ -278,23 +275,6 @@ async fn process_parameter(btree: &Baildon<String, String>, parameter: &Paramete
                 println!("not found");
             }
         },
-        Parameter::Help => {
-            let help = Cli::command().render_help().to_string();
-
-            let mut print_it = false;
-
-            for line in help.lines() {
-                if line.starts_with("Arguments:") {
-                    print_it = false;
-                }
-                if print_it && !line.is_empty() {
-                    println!("{}", line);
-                }
-                if line.starts_with("Commands:") {
-                    print_it = true;
-                }
-            }
-        }
         Parameter::Insert { key, value } => match btree.insert(key.clone(), value.clone()).await {
             Ok(opt_value) => match opt_value {
                 Some(old) => {
