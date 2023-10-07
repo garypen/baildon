@@ -20,7 +20,7 @@ clap.workspace = true
 dirs.workspace = true
 futures.workspace = true
 gluesql = { version = "0.14.0", default-features = false }
-baildon = { version = "0.1.1", path = "../baildon" }
+baildon = { version = "0.1.2", path = "../baildon" }
 libc.workspace = true
 rustyline.workspace = true
 serde.workspace = true
