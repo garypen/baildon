@@ -10,6 +10,8 @@ use baildon::btree::Direction;
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use rand::{thread_rng, Rng};
 
+const TEST_DB = "test.db";
+
 // Utility function for creating a database to use with tests
 async fn create_database() -> Result<Baildon<String, String>> {
     let mut contents = String::new();
@@ -19,7 +21,7 @@ async fn create_database() -> Result<Baildon<String, String>> {
         .read_to_string(&mut contents)
         .unwrap();
 
-    let db = Baildon::try_new("test.db", 7).await?;
+    let db = Baildon::try_new(TEST_DB, 7).await?;
 
     for (index, word) in contents
         .split(|c: char| c.is_whitespace())
@@ -56,11 +58,11 @@ fn baildon_delete(c: &mut Criterion) {
         // Benchmark baildon
         let (db, words) = rt
             .block_on(async {
-                let db = Baildon::<String, String>::try_open("test.db").await?;
+                let db = Baildon::<String, String>::try_open(TEST_DB).await?;
                 let words = get_keys(&db, 8192).await;
                 // Close the database to clean out the cache and then open it again.
                 drop(db);
-                let db = Baildon::<String, String>::try_open("test.db").await?;
+                let db = Baildon::<String, String>::try_open(TEST_DB).await?;
                 Ok::<(Baildon<String, String>, Vec<String>), anyhow::Error>((db, words))
             })
             .expect("task spawn failed");
@@ -93,11 +95,11 @@ fn baildon_get(c: &mut Criterion) {
         // Benchmark baildon
         let (db, words) = rt
             .block_on(async {
-                let db = Baildon::<String, String>::try_open("test.db").await?;
+                let db = Baildon::<String, String>::try_open(TEST_DB).await?;
                 let words = get_keys(&db, 8192).await;
                 // Close the database to clean out the cache and then open it again.
                 drop(db);
-                let db = Baildon::<String, String>::try_open("test.db").await?;
+                let db = Baildon::<String, String>::try_open(TEST_DB).await?;
                 Ok::<(Baildon<String, String>, Vec<String>), anyhow::Error>((db, words))
             })
             .expect("task spawn failed");
@@ -126,11 +128,11 @@ fn baildon_upsert(c: &mut Criterion) {
         // Benchmark baildon
         let (db, words) = rt
             .block_on(async {
-                let db = Baildon::<String, String>::try_open("test.db").await?;
+                let db = Baildon::<String, String>::try_open(TEST_DB).await?;
                 let words = get_keys(&db, 8192).await;
                 // Close the database to clean out the cache and then open it again.
                 drop(db);
-                let db = Baildon::<String, String>::try_open("test.db").await?;
+                let db = Baildon::<String, String>::try_open(TEST_DB).await?;
                 Ok::<(Baildon<String, String>, Vec<String>), anyhow::Error>((db, words))
             })
             .expect("task spawn failed");

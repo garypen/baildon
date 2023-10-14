@@ -46,7 +46,7 @@ impl<K> BaildonKey for K
 where
     K: Clone + Ord + Serialize + DeserializeOwned + std::fmt::Debug,
 {
-    // Nothing to implement, since A already supports the other traits.
+    // Nothing to implement, since K already supports the other traits.
     // It has the functions it needs already
 }
 
@@ -58,7 +58,7 @@ impl<V> BaildonValue for V
 where
     V: Clone + Serialize + DeserializeOwned + std::fmt::Debug,
 {
-    // Nothing to implement, since A already supports the other traits.
+    // Nothing to implement, since K already supports the other traits.
     // It has the functions it needs already
 }
 
@@ -418,17 +418,13 @@ where
                         // We (may) need to adjust our parent to clean out our neighbour
                         let update_root = AtomicBool::new(false);
                         let closure_cleanup_parent = |parent: &mut Node<K, V>| {
+                            // Remove the neighbour
                             // If we merged to the ascending:
                             //  - We take the max key from the neighbour and update our node key to
                             //    that value
-                            //  - Remove the neighbour
-                            // If we merged to the descending:
-                            //  - Remove the neighbour
+                            let _idx = parent.remove_child(neighbour_idx)?;
                             if direction == Direction::Ascending {
-                                let _idx = parent.remove_child(neighbour_idx)?;
                                 parent.update_child_key(node.index(), neighbour_max_key);
-                            } else {
-                                let _idx = parent.remove_child(neighbour_idx)?;
                             }
 
                             if parent.len() == 1 && parent.parent().is_none() {
@@ -608,7 +604,7 @@ where
                 }
             }
         }
-        // Finally, sync out our node and get ready to loop
+        // Finally, sync out our node and return our value
         self.replace_node(&mut nodes_lock, node);
         value
     }
