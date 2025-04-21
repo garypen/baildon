@@ -51,7 +51,7 @@ impl BaildonGlue {
         let config_path = canonical_path.display().to_string();
         let config_name = canonical_path
             .components()
-            .last()
+            .next_back()
             .expect("must be a last element")
             .as_os_str()
             .to_string_lossy()
@@ -122,6 +122,7 @@ impl BaildonGlue {
             .read(true)
             .write(true)
             .create(true)
+            .truncate(true)
             .open(&f_path)
             .await
             .map_err(|e| Error::StorageMsg(e.to_string()))?;

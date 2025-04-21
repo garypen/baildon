@@ -799,9 +799,9 @@ where
         f(node)
     }
 
-    async fn add_root<'a>(
+    async fn add_root(
         &self,
-        nodes_lock: &mut MutexGuard<'a, HashMap<usize, Node<K, V>, BuildIdentityHasher>>,
+        nodes_lock: &mut MutexGuard<'_, HashMap<usize, Node<K, V>, BuildIdentityHasher>>,
         children: Vec<usize>,
         keys: Vec<K>,
     ) -> usize {

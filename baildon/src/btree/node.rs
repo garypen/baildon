@@ -196,14 +196,8 @@ where
 
     pub(crate) fn key_index(&self, key: &K) -> Option<usize> {
         match self {
-            Node::Internal(node) => match node.pairs.binary_search_by(|pair| pair.key.cmp(key)) {
-                Ok(idx) => Some(idx),
-                Err(_idx) => None,
-            },
-            Node::Leaf(node) => match node.pairs.binary_search_by(|pair| pair.key.cmp(key)) {
-                Ok(idx) => Some(idx),
-                Err(_idx) => None,
-            },
+            Node::Internal(node) => node.pairs.binary_search_by(|pair| pair.key.cmp(key)).ok(),
+            Node::Leaf(node) => node.pairs.binary_search_by(|pair| pair.key.cmp(key)).ok(),
         }
     }
 

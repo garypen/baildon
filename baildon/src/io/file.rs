@@ -137,6 +137,7 @@ impl BTreeFile {
             .read(true)
             .write(true)
             .create(true)
+            .truncate(true)
             .open(path)
             .await?;
 
