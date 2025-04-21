@@ -38,7 +38,7 @@ async fn it_inserts_into_empty_tree_random_usize() {
         .expect("creates tree file");
     let mut input = vec![];
     for _i in 0..400 {
-        let i = rand::thread_rng().gen_range(0..100_000);
+        let i = rand::rng().random_range(0..100_000);
         tree.insert(i, i).await.expect("insert worked");
         input.push(i);
     }
@@ -94,7 +94,7 @@ async fn it_inserts_and_clears_into_empty_tree_random_usize() {
         .expect("creates tree file");
     let mut input = vec![];
     for _i in 0..200 {
-        let i = rand::thread_rng().gen_range(0..200);
+        let i = rand::rng().random_range(0..200);
         tree.insert(i, i).await.expect("insert worked");
         input.push(i);
     }

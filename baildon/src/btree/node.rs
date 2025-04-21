@@ -611,7 +611,7 @@ mod tests {
             vec!["b".to_string(), "d".to_string(), "f".to_string()],
             children.clone(),
         );
-        let search_keys = vec![
+        let search_keys = [
             "a".to_string(),
             "b".to_string(),
             "c".to_string(),
