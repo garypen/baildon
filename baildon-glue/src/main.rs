@@ -82,7 +82,7 @@ async fn main() -> Result<()> {
                 if line.is_empty() {
                     continue;
                 }
-                let output = match glue.execute_async(&line).await {
+                let output = match glue.execute(&line).await {
                     Ok(out) => {
                         if isatty == 0 {
                             format!("{out:?}")
@@ -130,8 +130,14 @@ async fn main() -> Result<()> {
         sep = ", ";
         ControlFlow::Continue(())
     };
-    glue.storage.schemas.traverse_entries(Direction::Ascending, callback).await;
-    println!("\nutilization: {}", glue.storage.schemas.utilization().await);
+    glue.storage
+        .schemas
+        .traverse_entries(Direction::Ascending, callback)
+        .await;
+    println!(
+        "\nutilization: {}",
+        glue.storage.schemas.utilization().await
+    );
     println!();
 
     Ok(())

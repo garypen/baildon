@@ -218,15 +218,15 @@ impl Store for BaildonGlue {
 
     async fn scan_data(&self, table_name: &str) -> Result<RowIter> {
         let table = self.get_table(table_name).await?;
-        Ok(Box::new(
+        // XXX: This is not ideal. I should figure out a fix at some point
+        Ok(Box::pin(futures::stream::iter(
             table
                 .entries(Direction::Ascending)
                 .await
-                .collect::<Vec<(Key, DataRow)>>()
-                .await
-                .into_iter()
-                .map(Ok),
-        ))
+                .map(Ok)
+                .collect::<Vec<Result<(Key, DataRow), Error>>>()
+                .await,
+        )))
     }
 }
 
