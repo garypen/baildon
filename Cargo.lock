@@ -182,7 +182,6 @@ dependencies = [
  "bincode",
  "criterion",
  "futures",
- "once_cell",
  "rand 0.9.1",
  "serde",
  "strum",

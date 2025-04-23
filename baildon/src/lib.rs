@@ -47,11 +47,11 @@ use bincode::config::FixintEncoding;
 use bincode::config::WithOtherIntEncoding;
 use bincode::config::WithOtherTrailing;
 use bincode::{DefaultOptions, Options};
-use once_cell::sync::Lazy;
+use std::sync::LazyLock;
 
-static BINCODER: Lazy<
+static BINCODER: LazyLock<
     WithOtherIntEncoding<WithOtherTrailing<DefaultOptions, AllowTrailing>, FixintEncoding>,
-> = Lazy::new(|| {
+> = LazyLock::new(|| {
     bincode::DefaultOptions::new()
         .allow_trailing_bytes()
         .with_fixint_encoding()
