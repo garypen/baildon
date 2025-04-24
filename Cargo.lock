@@ -203,13 +203,10 @@ dependencies = [
  "dirs",
  "futures",
  "gluesql",
- "libc",
  "rustyline",
  "serde",
  "serde_json",
- "strum",
  "tokio",
- "tracing",
  "tracing-appender",
  "tracing-subscriber",
 ]
@@ -225,7 +222,6 @@ dependencies = [
  "rustyline",
  "strum",
  "tokio",
- "tracing",
  "tracing-appender",
  "tracing-subscriber",
 ]

@@ -1,5 +1,6 @@
 use std::env;
 use std::fs::metadata;
+use std::io::IsTerminal;
 use std::ops::ControlFlow;
 use std::path::PathBuf;
 
@@ -42,7 +43,7 @@ fn get_history_file() -> Option<PathBuf> {
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let isatty = unsafe { libc::isatty(0) };
+    let isatty = std::io::stdin().is_terminal();
 
     let cli = Cli::parse();
 
@@ -66,7 +67,7 @@ async fn main() -> Result<()> {
 
     // `()` can be used when no completer is required
     let mut rl = DefaultEditor::new()?;
-    if isatty == 1 {
+    if isatty {
         if let Some(file_location) = get_history_file() {
             if let Err(e) = rl.load_history(&file_location) {
                 println!("error loading history: {e}");
@@ -84,16 +85,16 @@ async fn main() -> Result<()> {
                 }
                 let output = match glue.execute(&line).await {
                     Ok(out) => {
-                        if isatty == 0 {
-                            format!("{out:?}")
-                        } else {
+                        if isatty {
                             format!("out> {out:?}")
+                        } else {
+                            format!("{out:?}")
                         }
                     }
                     Err(err) => format!("err> {err}"),
                 };
                 println!("{output}");
-                if isatty == 1 {
+                if isatty {
                     rl.add_history_entry(line.as_str())?;
                 }
             }
@@ -112,7 +113,7 @@ async fn main() -> Result<()> {
         }
     }
 
-    if isatty == 1 {
+    if isatty {
         if let Some(file_location) = get_history_file() {
             if let Err(e) = rl.save_history(&file_location) {
                 println!("error saving history: {e}");
