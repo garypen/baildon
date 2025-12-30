@@ -195,7 +195,7 @@ impl BaildonGlue {
     }
 }
 
-#[async_trait::async_trait(?Send)]
+#[async_trait::async_trait]
 impl Store for BaildonGlue {
     async fn fetch_all_schemas(&self) -> Result<Vec<Schema>> {
         Ok(self
@@ -230,7 +230,7 @@ impl Store for BaildonGlue {
     }
 }
 
-#[async_trait::async_trait(?Send)]
+#[async_trait::async_trait]
 impl StoreMut for BaildonGlue {
     async fn insert_schema(&mut self, schema: &Schema) -> Result<()> {
         let t_name = schema.table_name.clone();

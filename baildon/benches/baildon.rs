@@ -8,9 +8,9 @@ use baildon::btree::Baildon;
 use baildon::btree::Direction;
 
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
-use rand::{thread_rng, Rng};
+use rand::{rng, Rng};
 
-const TEST_DB = "test.db";
+const TEST_DB: &str = "test.db";
 
 // Utility function for creating a database to use with tests
 async fn create_database() -> Result<Baildon<String, String>> {
@@ -72,7 +72,7 @@ fn baildon_delete(c: &mut Criterion) {
             |b, words| {
                 b.to_async(tokio::runtime::Runtime::new().expect("build tokio runtime"))
                     .iter(|| async {
-                        let word = &words[thread_rng().gen_range(0..*size)];
+                        let word = &words[rng().random_range(0..*size)];
                         let _ = db.delete(word).await;
                     })
             },
@@ -106,7 +106,7 @@ fn baildon_get(c: &mut Criterion) {
         group.bench_with_input(BenchmarkId::new("baildon get", size), &words, |b, words| {
             b.to_async(tokio::runtime::Runtime::new().expect("build tokio runtime"))
                 .iter(|| async {
-                    let word = &words[thread_rng().gen_range(0..*size)];
+                    let word = &words[rng().random_range(0..*size)];
                     let _ = db.get(word).await;
                 })
         });
@@ -142,7 +142,7 @@ fn baildon_upsert(c: &mut Criterion) {
             |b, words| {
                 b.to_async(tokio::runtime::Runtime::new().expect("build tokio runtime"))
                     .iter(|| async {
-                        let word = &words[thread_rng().gen_range(0..*size)];
+                        let word = &words[rng().random_range(0..*size)];
                         let _ = db.insert(word.to_string(), "value".to_string()).await;
                     })
             },
