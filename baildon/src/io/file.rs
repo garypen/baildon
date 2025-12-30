@@ -137,6 +137,7 @@ impl BTreeFile {
             .read(true)
             .write(true)
             .create(true)
+            .truncate(true)
             .open(path)
             .await?;
 
@@ -349,7 +350,7 @@ impl BTreeFile {
     }
 
     fn blocks_needed(size: u64) -> u64 {
-        if size % BLOCK_SIZE == 0 {
+        if size.is_multiple_of(BLOCK_SIZE) {
             size / BLOCK_SIZE
         } else {
             size / BLOCK_SIZE + 1
