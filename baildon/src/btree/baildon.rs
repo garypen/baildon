@@ -681,6 +681,7 @@ where
     /// Verify all the nodes in the tree.
     pub async fn verify(&self, direction: Direction) -> Result<()> {
         let callback = |node: &Node<K, V>| {
+            let mut cf = ControlFlow::Continue(());
             let mut seen_keys: Vec<K> = vec![];
             if node.is_leaf() {
                 for key in node.keys() {
@@ -688,23 +689,24 @@ where
                 }
                 seen_keys.extend(node.keys().cloned());
             } else {
-                futures::executor::block_on(async {
+                cf = futures::executor::block_on(async {
                     let mut nodes_lock = self.nodes.lock().await;
                     for child in node.children() {
                         let child = match self.find_node_with_lock(&mut nodes_lock, child).await {
                             Ok(c) => c,
                             Err(e) => {
                                 tracing::error!("could not find node: {e}");
-                                return ControlFlow::Break(());
+                                cf = ControlFlow::Break(());
+                                break;
                             }
                         };
                         assert_eq!(Some(node.index()), child.parent());
                     }
-                    ControlFlow::Continue(())
+                    cf
                 });
             }
             node.verify_keys();
-            ControlFlow::Continue(())
+            cf
         };
         self.traverse_nodes(direction, callback).await;
         Ok(())
