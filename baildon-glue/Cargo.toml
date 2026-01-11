@@ -19,7 +19,7 @@ anyhow.workspace = true
 clap.workspace = true
 dirs.workspace = true
 futures.workspace = true
-gluesql = { version = "0.18.0", default-features = false }
+gluesql = { version = "0.19.0", default-features = false }
 baildon = { version = "0.1.2", path = "../baildon" }
 rustyline.workspace = true
 serde.workspace = true
