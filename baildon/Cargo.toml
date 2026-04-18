@@ -24,7 +24,7 @@ tracing.workspace = true
 
 [dev-dependencies]
 criterion = { version = "0.8.0", features = ["async_tokio"] }
-rand = "0.9.1"
+rand = "0.10.0"
 tracing = {version = "0.1", default-features = false}
 tracing-subscriber = {version = "0.3", default-features = false, features = ["env-filter", "fmt"]}
 test-log = { version = "0.2.17", default-features = false, features = ["trace"] }
