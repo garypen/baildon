@@ -9,8 +9,8 @@ use futures::StreamExt;
 use gluesql::core::data::Schema;
 // use gluesql::core::result::Result;
 use gluesql::core::store::{
-    AlterTable, CustomFunction, CustomFunctionMut, DataRow, Index, IndexMut, Metadata, RowIter,
-    Store, StoreMut, Transaction,
+    AlterTable, CustomFunction, CustomFunctionMut, DataRow, Index, IndexMut, Metadata, Planner,
+    RowIter, Store, StoreMut, Transaction,
 };
 use gluesql::prelude::{Error, Key};
 use serde::{Deserialize, Serialize};
@@ -194,6 +194,8 @@ impl BaildonGlue {
         Ok(())
     }
 }
+
+impl Planner for BaildonGlue {}
 
 #[async_trait::async_trait]
 impl Store for BaildonGlue {
