@@ -1,6 +1,6 @@
 use super::*;
 
-use rand::Rng;
+use rand::RngExt;
 
 #[tokio::test]
 async fn it_creates_tree() {
